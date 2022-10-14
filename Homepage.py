@@ -111,14 +111,14 @@ p3tab2.markdown('(%s) **尹亭, 冯楚怡.**'%majors[1])
 p3tab2.text('\n')
 
 p3tab2.subheader('在读-2021级')
-p3tab2.markdown('(**%s**) **张禾, 郑越.**'%majors[0])
-p3tab2.markdown('(**%s**) **李智, 毛瑀璇, 钱嘉琪.**'%majors[1])
+p3tab2.markdown('(%s) **张禾, 郑越.**'%majors[0])
+p3tab2.markdown('(%s) **李智, 毛瑀璇, 钱嘉琪.**'%majors[1])
 students2021 = Image.open('photos/研究生/2021.png')
 p3tab2.image(students2021, caption='2022年初聚餐')
 p3tab2.text('\n')
 
 p3tab2.subheader('在读-2020级')
-p3tab2.markdown('(**%s**) **晏嘉泽, 张祯乾, 纪金杉, 文茜雅, 于垆玥.**'%majors[0])
+p3tab2.markdown('(%s) **晏嘉泽, 张祯乾, 纪金杉, 文茜雅, 于垆玥.**'%majors[0])
 students2020 = Image.open('photos/研究生/2020.png')
 p3tab2.image(students2020, caption='2021年太原参会')
 
