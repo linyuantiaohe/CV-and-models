@@ -1,15 +1,25 @@
 import streamlit as st
 import pandas as pd
 import os
+from PIL import Image
+
+st.set_page_config(
+    page_title="Dr.Wang Ge's Homepage",
+    page_icon="😎",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'About': "Working hard!"
+    }
+)
 
 os.system('python initial.py')
 
-st.title("王歌   主页")
-
-st.sidebar.markdown("联系方式:")
-st.sidebar.markdown("E-mail: wangge@ncepu.edu.cn")
-st.sidebar.markdown("华北电力大学教一楼340")
+st.title("Homepage 王歌")
 st.sidebar.markdown("诚招勤奋、好学、踏实的研究生, 急需有编程背景的同学。待遇从优！")
+st.sidebar.markdown("E-mail: wangge@ncepu.edu.cn")
+st.sidebar.markdown("地址: 北京市昌平区北农路2号")
+st.sidebar.map(pd.DataFrame(pd.Series([40.088243727163956,116.30600799534605],index=['lat', 'lon']),columns=['Ncepu']).T)
 
 page1, page2, page3 =st.tabs(["个人简历","科研工作","人才培养"])
 
@@ -92,19 +102,25 @@ courses=pd.read_csv("courses.csv")
 for i in courses.index:
 	p3tab1.markdown("[%d] %s, %d学时, %d-%d学年第%d学期, 选课人数: %d人。"%(i+1,courses.loc[i,"课程名称"],courses.loc[i,"课时"],courses.loc[i,"学年起始"],courses.loc[i,"学年终止"],courses.loc[i,"学期"],courses.loc[i,"选课人数"]))
 
-p3tab2.markdown('**指导全日制研究生**')
+p3tab2.subheader('在读-2022级')
 
-p3tab2.markdown('(2022级) 程煜, 谭宇璇, 尹亭, 冯楚怡')
-p3tab2.markdown('(2021级) 张禾, 李智, 毛瑀璇, 钱嘉琪')
-p3tab2.markdown('(2020级) 晏嘉泽, 张祯乾')
+majors=["工业工程与管理","物流工程与管理"]
 
+p3tab2.markdown('(%s) **程煜, 谭宇璇, 康晓杰, 古明越, 赵铭路, 李梓熙, 周舟.**'%majors[0])
+p3tab2.markdown('(%s) **尹亭, 冯楚怡.**'%majors[1])
 p3tab2.text('\n')
 
-p3tab2.markdown('**指导非全日制研究生**')
+p3tab2.subheader('在读-2021级')
+p3tab2.markdown('(**%s**) **张禾, 郑越.**'%majors[0])
+p3tab2.markdown('(**%s**) **李智, 毛瑀璇, 钱嘉琪.**'%majors[1])
+students2021 = Image.open('photos/研究生/2021.png')
+p3tab2.image(students2021, caption='2022年初聚餐')
+p3tab2.text('\n')
 
-p3tab2.markdown('(2022级) 康晓杰, 古明越, 赵铭路, 李梓熙, 周舟')
-p3tab2.markdown('(2021级) 郑越')
-p3tab2.markdown('(2020级) 纪金杉, 文茜雅, 于垆玥')
+p3tab2.subheader('在读-2020级')
+p3tab2.markdown('(**%s**) **晏嘉泽, 张祯乾, 纪金杉, 文茜雅, 于垆玥.**'%majors[0])
+students2020 = Image.open('photos/研究生/2020.png')
+p3tab2.image(students2020, caption='2021年太原参会')
 
 p3tab3.markdown('**指导本科生**')
 
