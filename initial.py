@@ -15,7 +15,7 @@ papers.to_csv("publications.csv")
 # %%
 projects=pd.read_excel("myworks.xlsx",sheet_name="承担项目").fillna(0)
 
-projects=projects.sort_values(by=["类型","开始年份"],ascending=False)
+projects=projects.sort_values(by=["开始年份","类型"],ascending=False)
 projects.to_csv("projects.csv")
 
 # %%

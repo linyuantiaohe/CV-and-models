@@ -15,25 +15,33 @@ st.set_page_config(
 
 os.system('python initial.py')
 
-st.title("Homepage 王歌")
+st.image(Image.open('photos/logo.png'))
 st.sidebar.markdown("诚招勤奋、好学、踏实的研究生, 急需有编程背景的同学。待遇从优！")
 st.sidebar.markdown("E-mail: wangge@ncepu.edu.cn")
 st.sidebar.markdown("地址: 北京市昌平区北农路2号")
 st.sidebar.map(pd.DataFrame(pd.Series([40.088243727163956,116.30600799534605],index=['lat', 'lon']),columns=['Ncepu']).T)
 
+col1,col2=st.columns([8,2])
+col1.subheader("王歌 博士")
+col1.markdown("**华北电力大学 经济与管理学院 讲师, 硕士生导师**")
+
+myphoto = Image.open('photos/homepage.jpeg')
+col2.image(myphoto)
+
+
 page1, page2, page3 =st.tabs(["个人简历","科研工作","人才培养"])
 
 #-----------------page1
 page1.subheader("个人简历")
-page1.markdown("华北电力大学 经济与管理学院 博士, 硕导")
 
-p1tab1, p1tab2, p1tab3 =page1.tabs(["工作和教育经历","研究兴趣","招生方向"])
+page1.markdown("2019 至今 华北电力大学 经济与管理学院 讲师")
+
+p1tab1, p1tab2, p1tab3 =page1.tabs(["教育经历","研究兴趣","招生方向"])
 #tab1.markdown('**工作和教育经历**')
 
-p1tab1.markdown("[1] 2019 至今 华北电力大学 经济与管理学院 讲师")
-p1tab1.markdown("[2] 2014-2019 中国石油大学（北京）中国能源战略研究院/经济管理学院 硕博连读")
-p1tab1.markdown("[3] 2018-2019 美国加州大学伯克利分校 劳伦斯伯克利国家实验室 联合培养")
-p1tab1.markdown("[4] 2009-2013 南京大学 天文与空间科学学院 本科")
+p1tab1.markdown("[1] 2014-2019 中国石油大学（北京）中国能源战略研究院/经济管理学院 硕博连读")
+p1tab1.markdown("[2] 2018-2019 美国加州大学伯克利分校 劳伦斯伯克利国家实验室 联合培养")
+p1tab1.markdown("[3] 2009-2013 南京大学 天文与空间科学学院 本科")
 
 
 #tab2.markdown('**研究兴趣**')
@@ -56,7 +64,7 @@ projects=pd.read_csv("projects.csv")
 rewards=pd.read_csv("rewards.csv")
 
 page2.markdown("- 累计发表论文%d篇"%len(papers))
-page2.markdown("- 主持科研项目%d项, 累计承担经费:  %d万元"%(len(projects[projects["参与情况"]=="主持"]),projects["金额"].sum()))
+page2.markdown("- 主持科研项目%d项, 累计承担经费:  %.1f万元"%(len(projects[projects["参与情况"]=="主持"]),projects["金额"].sum()))
 page2.markdown("- 获得各类奖项%d项"%len(rewards))
 
 p2tab1, p2tab2, p2tab3 =page2.tabs(["发表论文","承担项目","获得奖项"])
@@ -71,17 +79,17 @@ for i in papers.index:
 	p2tab1.markdown("[%d] %s"%(item+1,papers.loc[i,'papers']))
 	item+=1
 
-for i in projects[projects["类型"]=="纵向"].index:
+for i in projects.index:
 	if projects.loc[i,"参与情况"]=="主持":
-		p2tab2.markdown("[%d] **%s**, %s, %s, %d 万元。 %d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"金额"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
+		p2tab2.markdown("[%d] **%s**, %s, %s, %.1f 万元。 %d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"金额"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
 	else:
 		p2tab2.markdown("[%d] **%s**, %s, %s。%d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
 
-for i in projects[projects["类型"]=="横向"].index:
-	if projects.loc[i,"参与情况"]=="主持":
-		p2tab2.markdown("[%d] **%s**, %s, %s, %d 万元。 %d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"金额"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
-	else:
-		p2tab2.markdown("[%d] **%s**, %s, %s。 %d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
+#for i in projects[projects["类型"]=="横向"].index:
+#	if projects.loc[i,"参与情况"]=="主持":
+#		p2tab2.markdown("[%d] **%s**, %s, %s, %d 万元。 %d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"金额"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
+#	else:
+#		p2tab2.markdown("[%d] **%s**, %s, %s。 %d - %d, %s."%(i+1,projects.loc[i,"项目类型"].strip(" "),projects.loc[i,"项目标题"].strip(" "),projects.loc[i,"参与情况"],projects.loc[i,"开始年份"],projects.loc[i,"结束年份"],projects.loc[i,"在研情况"]))
 
 for i in rewards.index:
 	if rewards.loc[i,'类型'] != "其它":
@@ -92,6 +100,8 @@ for i in rewards.index:
 #-----------------page3
 
 page3.subheader('人才培养')
+
+page3.markdown("组内有在读硕士研究生19人。")
 
 p3tab1, p3tab2, p3tab3 =page3.tabs(["教授课程","研究生培养","本科生培养"])
 
